@@ -1,0 +1,69 @@
+<div class="table-responsive" *ngIf="products && products.length; else empty">
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripción <span class="icon-admiration">i</span></th>
+        <th class="date-col">Fecha de liberación <span class="icon-admiration">i</span></th>
+        <th class="date-col">Fecha de reestructuración <span class="icon-admiration">i</span></th>
+        <th class="date-col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of currentPageProducts; trackBy: trackById">
+        <td class="logo-cell">
+          <div class="logo-placeholder">KA</div>
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td class="date-col">{{ product.date_release | date : 'dd/MM/yyyy' }}</td>
+        <td class="date-col">{{ product.date_revision | date : 'dd/MM/yyyy' }}</td>
+        <td class="actions-col">
+          <button class="menu-icon-btn" (click)="toggleMenu(product.id)">⋮</button>
+
+          <div class="dropdown-menu" *ngIf="activeMenuId === product.id">
+              <button class="dropdown-item" [routerLink]="['/products/edit', product.id]">
+                Editar
+              </button>
+              <button class="dropdown-item" (click)="delete(product)">Eliminar</button>
+          </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #empty>
+  <p class="text-muted">No hay productos disponibles.</p>
+</ng-template>
+
+<div class="table-footer">
+  <div class="results-info">{{ total }} resultados — mostrando {{ showingFrom }}-{{ showingTo }}</div>
+
+  <div class="pagination-buttons">
+    <button (click)="prevPage()" [disabled]="pageIndex === 0">«</button>
+    <ng-container *ngFor="let i of [].constructor(totalPages); let idx = index">
+      <button class="page-btn" [class.active]="idx === pageIndex" (click)="goToPage(idx)">{{ idx + 1 }}</button>
+    </ng-container>
+    <button (click)="nextPage()" [disabled]="pageIndex >= totalPages - 1">»</button>
+  </div>
+
+  <div class="pagination-control">
+    <label>
+      Mostrar
+      <select #pageSizeSelect class="results-per-page" [value]="pageSize" (change)="onPageSizeChange(pageSizeSelect.value)">
+        <option *ngFor="let opt of pageSizeOptions" [value]="opt">{{ opt }}</option>
+      </select>
+      por página
+    </label>
+  </div>
+</div>
+
+@if(isModalOpen){
+   <app-modal-delete 
+    [product]="deleteItem"
+    (close)="closeModal()" 
+    (confirmDelete)="onConfirmDelete($event)">
+  </app-modal-delete>
+} 

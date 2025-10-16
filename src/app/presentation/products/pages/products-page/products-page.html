@@ -1,0 +1,12 @@
+<div class="main-container">
+    <div class="header-controls">
+        <input type="text" placeholder="Search..." class="search-input" (input)="onSearch($event.target.value)">
+        <button class="add-button" [routerLink]="['/products/add']">Agregar</button>
+    </div>
+
+    <div class="product-table-container">
+      <app-product-list [products]="filteredProducts$ | async"></app-product-list>
+    </div>
+</div>
+
+

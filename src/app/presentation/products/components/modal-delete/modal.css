@@ -1,0 +1,70 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 0; 
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 450px;
+    z-index: 10001;
+    overflow: hidden; 
+}
+
+.modal-body {
+    padding: 30px 40px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #333;
+    text-align: left;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 15px;
+    background-color: #fcfcfc; 
+    border-top: 1px solid #eeeeee; 
+    padding: 15px 25px;
+}
+
+.btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-width: 50%;
+}
+
+.btn-cancelar {
+    background-color: #e8eaf6;
+    color: #3f51b5;
+    border: none; 
+}
+
+.btn-cancelar:hover {
+    background-color: #dbe0f7;
+}
+
+.btn-submit {
+    background-color: #ffdd57;
+    color: #333;
+}
+
+.btn-submit:hover:not([disabled]) {
+    background-color: #ffc933;
+}

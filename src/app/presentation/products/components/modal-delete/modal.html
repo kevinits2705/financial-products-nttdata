@@ -1,0 +1,12 @@
+<div class="modal-backdrop">
+    <div class="modal-content">
+        
+        <div class="modal-body">
+            ¿Estás seguro de eliminar el producto <strong>{{ product!.name }}</strong>?
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-cancelar" (click)="closeModal()">Cancelar</button>
+            <button class="btn btn-submit" (click)="confirm()">Confirmar</button>
+        </div>
+    </div>
+</div>
